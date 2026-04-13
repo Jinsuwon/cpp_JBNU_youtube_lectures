@@ -1104,9 +1104,9 @@ void scale_number(int& num)
 //        cout << "Shallow destructor: free storage" << endl;
 //    }
 //};
-//
-//// --------------------
-//// ±íÀº º¹»ç
+////
+////// --------------------
+////// ±íÀº º¹»ç
 //// --------------------
 //class Deep
 //{
