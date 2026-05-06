@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="week8_Operator_Overloading.cpp" />
     <ClCompile Include="week6_inheritance.cpp" />
     <ClCompile Include="week6_inheritance_constructor_desconstructor.cpp" />
     <ClCompile Include="week7_Polymorphism.cpp" />
