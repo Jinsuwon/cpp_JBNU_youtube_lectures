@@ -278,64 +278,64 @@
 
 
 // 인터페이스 클래스: 모든 함수를 순수 가상 함수만으로 가진 추상 클래스
-#include <iostream>
-class Entity
-{
-protected:
-	int x;
-	int y;
-
-public:
-	Entity(int x, int y)
-		:x{ x }, y{ y } {
-	}
-	virtual ~Entity()
-	{
-		std::cout << "Entity Destructor Called" << std::endl;
-	}
-
-	virtual void Move(int dx, int dy) = 0;
-	virtual void PrintPosition() const = 0;
-};
-
-class Player : public Entity
-{
-private:
-	int xp;
-	int hp;
-
-public:
-	Player(int x, int y, int hp, int xp)
-		:Entity{ x,y }, hp{ hp }, xp{ xp } {
-	}
-	virtual ~Player()
-	{
-		std::cout << "Player Destructor Called" << std::endl;
-	}
-
-	virtual void Move(int dx, int dy) // 오버라이드 하는 쪽이든 아니든 'virtual'을 붙혀주는 것을 습관화하자!
-	{
-		x += dx * 2;
-		y += dy * 2;
-	}
-
-	virtual void PrintPosition() const override // 오버라이드 할꺼면 표시를 붙혀주자
-	{
-		std::cout << "Player: " << x << "," << y << std::endl;
-	}
-};
-
-int main()
-{
-	//Entity* e = new Player{ 1,1,10,10 };
-	//e->PrintPosition(); // Player: 1,1
-
-
-	Player p{ 1,1,10,10 };
-	const Entity& e = p; // 
-
-	e.PrintPosition(); // 컴파일러는 const e가 printposition을 통해 멤버변수를 바꾸는지 안 바꾸는지
-	//모르기 때문에 printposion함수 정의에 const를 붙혀주도록 하자.
-	//또한 printposition은 오버라이드 함으로 virtual과 const 모두를 기본, 유도클래스 함수에 적어주자 
-
-}
+//#include <iostream>
+//class Entity
+//{
+//protected:
+//	int x;
+//	int y;
+//
+//public:
+//	Entity(int x, int y)
+//		:x{ x }, y{ y } {
+//	}
+//	virtual ~Entity()
+//	{
+//		std::cout << "Entity Destructor Called" << std::endl;
+//	}
+//
+//	virtual void Move(int dx, int dy) = 0;
+//	virtual void PrintPosition() const = 0;
+//};
+//
+//class Player : public Entity
+//{
+//private:
+//	int xp;
+//	int hp;
+//
+//public:
+//	Player(int x, int y, int hp, int xp)
+//		:Entity{ x,y }, hp{ hp }, xp{ xp } {
+//	}
+//	virtual ~Player()
+//	{
+//		std::cout << "Player Destructor Called" << std::endl;
+//	}
+//
+//	virtual void Move(int dx, int dy) // 오버라이드 하는 쪽이든 아니든 'virtual'을 붙혀주는 것을 습관화하자!
+//	{
+//		x += dx * 2;
+//		y += dy * 2;
+//	}
+//
+//	virtual void PrintPosition() const override // 오버라이드 할꺼면 표시를 붙혀주자
+//	{
+//		std::cout << "Player: " << x << "," << y << std::endl;
+//	}
+//};
+//
+//int main()
+//{
+//	//Entity* e = new Player{ 1,1,10,10 };
+//	//e->PrintPosition(); // Player: 1,1
+//
+//
+//	Player p{ 1,1,10,10 };
+//	const Entity& e = p; // 
+//
+//	e.PrintPosition(); // 컴파일러는 const e가 printposition을 통해 멤버변수를 바꾸는지 안 바꾸는지
+//	//모르기 때문에 printposion함수 정의에 const를 붙혀주도록 하자.
+//	//또한 printposition은 오버라이드 함으로 virtual과 const 모두를 기본, 유도클래스 함수에 적어주자 
+//
+//}
