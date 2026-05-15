@@ -130,6 +130,7 @@
     <ClCompile Include="week6_inheritance.cpp" />
     <ClCompile Include="week6_inheritance_constructor_desconstructor.cpp" />
     <ClCompile Include="week7_Polymorphism.cpp" />
+    <ClCompile Include="week9_Generic_Programming.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
