@@ -478,161 +478,161 @@
 
 
 // 첨자연산자의 const 활용을 알아보자
-class Array
-{
-private:
-	int* ptr;
-	int size;
-
-public:
-	Array(int val, int size)
-		:size{ size }
-	{
-		ptr = new int[size];
-		for (int i = 0; i < size; i++)
-		{
-			ptr[i] = val + i;
-		}
-	}
-
-	int GetSize() const
-	{
-		return size;
-	}
-
-	Array& operator=(const Array& rhs)
-	{
-		if (this == &rhs)
-			return *this;
-
-		delete[] ptr;
-
-		ptr = new int[rhs.size];
-		size = rhs.size;
-		for (int i = 0; i < size; i++)
-		{
-			ptr[i] = rhs.ptr[i];
-		}
-
-		return *this;
-	}
-
-	~Array()
-	{
-		delete[] ptr; // 동적메모리 해제
-	}
-
-	int& operator[](int index) 
-	{
-		if (index < 0 || index >= size)
-		{
-			std::cout << "Out of range!" << std::endl;
-			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
-		}
-		return ptr[index];
-	}
-
-	int operator[](int index) const
-	{
-		if (index < 0 || index >= size)
-		{
-			std::cout << "Out of range!" << std::endl;
-			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
-		}
-		return ptr[index];
-	}
-};
-
-int main()
-{
-	const Array a1{ 5,10 }; // 함수: int operator[](int index) const 를 호출
-	Array a2{ 3,5 };
-	a2[0] = 10; // 함수: int& operator[](int index) 를 호출
-
-
-	// 첨자 연산자를 할 때는 함수 선언을 2가지(일반형, const형) 2가지로 해줘야 한다!
-	std::cout << a1[0] << std::endl;
-	std::cout << a2[0] << std::endl;
-} 
-
-
-
-//배열에 대한 복사 및 대입을 차단하고 싶을 경우에, 해당 생성자를 private 선언 또는 delete로 접근 불가능하게 할 수 있음
-class Array
-{
-private:
-	int* ptr;
-	int size;
-	Array(const Array& other);
-
-public:
-	Array& operator=(const Array& rhs) = delete;
-
-
-	Array(int val, int size)
-		:size{ size }
-	{
-		ptr = new int[size];
-		for (int i = 0; i < size; i++)
-		{
-			ptr[i] = val + i;
-		}
-	}
-
-	int GetSize() const
-	{
-		return size;
-	}
-
-	Array& operator=(const Array& rhs)
-	{
-		if (this == &rhs)
-			return *this;
-
-		delete[] ptr;
-
-		ptr = new int[rhs.size];
-		size = rhs.size;
-		for (int i = 0; i < size; i++)
-		{
-			ptr[i] = rhs.ptr[i];
-		}
-
-		return *this;
-	}
-
-	~Array()
-	{
-		delete[] ptr; // 동적메모리 해제
-	}
-
-	int& operator[](int index)
-	{
-		if (index < 0 || index >= size) 
-		{
-			std::cout << "Out of range!" << std::endl;
-			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
-		}
-		return ptr[index];
-	}
-
-	int operator[](int index) const
-	{
-		if (index < 0 || index >= size)
-		{
-			std::cout << "Out of range!" << std::endl;
-			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
-		}
-		return ptr[index];
-	}
-};
-
-int main()
-{
-	const Array a1{ 5,10 };
-	Array a2{ 3,5 };
-
-	a2 = a1; // a2.operator=(a1);
-	Array a3 = a1;
-
-}
+//class Array
+//{
+//private:
+//	int* ptr;
+//	int size;
+//
+//public:
+//	Array(int val, int size)
+//		:size{ size }
+//	{
+//		ptr = new int[size];
+//		for (int i = 0; i < size; i++)
+//		{
+//			ptr[i] = val + i;
+//		}
+//	}
+//
+//	int GetSize() const
+//	{
+//		return size;
+//	}
+//
+//	Array& operator=(const Array& rhs)
+//	{
+//		if (this == &rhs)
+//			return *this;
+//
+//		delete[] ptr;
+//
+//		ptr = new int[rhs.size];
+//		size = rhs.size;
+//		for (int i = 0; i < size; i++)
+//		{
+//			ptr[i] = rhs.ptr[i];
+//		}
+//
+//		return *this;
+//	}
+//
+//	~Array()
+//	{
+//		delete[] ptr; // 동적메모리 해제
+//	}
+//
+//	int& operator[](int index) 
+//	{
+//		if (index < 0 || index >= size)
+//		{
+//			std::cout << "Out of range!" << std::endl;
+//			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
+//		}
+//		return ptr[index];
+//	}
+//
+//	int operator[](int index) const
+//	{
+//		if (index < 0 || index >= size)
+//		{
+//			std::cout << "Out of range!" << std::endl;
+//			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
+//		}
+//		return ptr[index];
+//	}
+//};
+//
+//int main()
+//{
+//	const Array a1{ 5,10 }; // 함수: int operator[](int index) const 를 호출
+//	Array a2{ 3,5 };
+//	a2[0] = 10; // 함수: int& operator[](int index) 를 호출
+//
+//
+//	// 첨자 연산자를 할 때는 함수 선언을 2가지(일반형, const형) 2가지로 해줘야 한다!
+//	std::cout << a1[0] << std::endl;
+//	std::cout << a2[0] << std::endl;
+//} 
+//
+//
+//
+////배열에 대한 복사 및 대입을 차단하고 싶을 경우에, 해당 생성자를 private 선언 또는 delete로 접근 불가능하게 할 수 있음
+//class Array
+//{
+//private:
+//	int* ptr;
+//	int size;
+//	Array(const Array& other);
+//
+//public:
+//	Array& operator=(const Array& rhs) = delete;
+//
+//
+//	Array(int val, int size)
+//		:size{ size }
+//	{
+//		ptr = new int[size];
+//		for (int i = 0; i < size; i++)
+//		{
+//			ptr[i] = val + i;
+//		}
+//	}
+//
+//	int GetSize() const
+//	{
+//		return size;
+//	}
+//
+//	Array& operator=(const Array& rhs)
+//	{
+//		if (this == &rhs)
+//			return *this;
+//
+//		delete[] ptr;
+//
+//		ptr = new int[rhs.size];
+//		size = rhs.size;
+//		for (int i = 0; i < size; i++)
+//		{
+//			ptr[i] = rhs.ptr[i];
+//		}
+//
+//		return *this;
+//	}
+//
+//	~Array()
+//	{
+//		delete[] ptr; // 동적메모리 해제
+//	}
+//
+//	int& operator[](int index)
+//	{
+//		if (index < 0 || index >= size) 
+//		{
+//			std::cout << "Out of range!" << std::endl;
+//			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
+//		}
+//		return ptr[index];
+//	}
+//
+//	int operator[](int index) const
+//	{
+//		if (index < 0 || index >= size)
+//		{
+//			std::cout << "Out of range!" << std::endl;
+//			exit(1); // 코드는 정상 종료면 'exit(0)'으로 끝난다. 여기선 코드가 오류라고 볼 수 있기에 exit(1)로 끝낸다
+//		}
+//		return ptr[index];
+//	}
+//};
+//
+//int main()
+//{
+//	const Array a1{ 5,10 };
+//	Array a2{ 3,5 };
+//
+//	a2 = a1; // a2.operator=(a1);
+//	Array a3 = a1;
+//
+//}
