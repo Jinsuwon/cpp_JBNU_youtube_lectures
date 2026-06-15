@@ -36,6 +36,9 @@
     <ClCompile Include="week9_Generic_Programming.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="week10_STL.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h">
